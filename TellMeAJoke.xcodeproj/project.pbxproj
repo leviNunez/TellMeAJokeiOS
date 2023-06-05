@@ -15,6 +15,7 @@
 		592CA8B02A2E6C76000FF91A /* TellMeAJokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8AF2A2E6C76000FF91A /* TellMeAJokeUITests.swift */; };
 		592CA8B22A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8B12A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift */; };
 		592CA8C12A2E7575000FF91A /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8C02A2E7575000FF91A /* Joke.swift */; };
+		592CA8C92A2E8885000FF91A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8C82A2E8885000FF91A /* DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		592CA8AF2A2E6C76000FF91A /* TellMeAJokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeAJokeUITests.swift; sourceTree = "<group>"; };
 		592CA8B12A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeAJokeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		592CA8C02A2E7575000FF91A /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
+		592CA8C82A2E8885000FF91A /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,9 +143,18 @@
 		592CA8BF2A2E7436000FF91A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				592CA8C72A2E884D000FF91A /* Data */,
 				592CA8C02A2E7575000FF91A /* Joke.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		592CA8C72A2E884D000FF91A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				592CA8C82A2E8885000FF91A /* DataSource.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 			files = (
 				592CA8972A2E6C75000FF91A /* ContentView.swift in Sources */,
 				592CA8952A2E6C75000FF91A /* TellMeAJokeApp.swift in Sources */,
+				592CA8C92A2E8885000FF91A /* DataSource.swift in Sources */,
 				592CA8C12A2E7575000FF91A /* Joke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
