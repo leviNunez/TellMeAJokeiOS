@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct TellMeAJokeApp: App {
+    private var service: NetworkService
+    private var repository: JokeRepository
+    
+    init() {
+        service = NetworkManager()
+        repository = JokeRepositoryImpl(service: service)
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: JokeViewModel(jokeRepository: repository))
         }
     }
 }
