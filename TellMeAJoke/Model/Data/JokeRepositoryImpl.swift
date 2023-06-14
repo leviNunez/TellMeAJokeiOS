@@ -8,25 +8,25 @@
 import Foundation
 import Combine
 
-final class JokeRepositoryImpl: JokeRepository {
+final class JokeRepositoryImpl: JokeRepositoryProtocol {
     
-    private var service: NetworkService
+    private let service: JokeServiceProtocol
     
-    init(service: NetworkService) {
+    init(service: JokeServiceProtocol) {
         self.service = service
     }
+    
     func getJoke() -> Future<Joke, Error> {
-        let urlString = Constants.baseURL + Endpoints.randomJoke
+        let url = AppResource.baseURL + AppResource.Endpoint.randomJoke
         
         return Future {  promise in
             Task { [weak self] in
-                guard let self = self else { return promise(.failure(NetworkError.other)) }
+                guard let self = self else { return promise(.failure(NetworkError.unknownError)) }
                 
                 do {
-                    let joke: Joke = try await self.service.fetch(urlString: urlString)
+                    let joke: Joke = try await self.service.fetch(urlString: url)
                     promise(.success(joke))
                 } catch {
-                    let err = error
                     promise(.failure(error))
                 }
             }

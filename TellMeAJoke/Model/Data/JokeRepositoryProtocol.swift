@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol JokeRepository {
+protocol JokeRepositoryProtocol {
     
     func getJoke() -> Future<Joke, Error>
     

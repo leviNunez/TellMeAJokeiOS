@@ -8,28 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var viewModel: JokeViewModel
+    private let repository: JokeRepositoryProtocol
+    
+    init() {
+        let service = NetworkManager()
+        repository = JokeRepositoryImpl(service: service)
+    }
+    
     var body: some View {
-        VStack {
-            switch viewModel.uiState {
-            case .loading:
-                ProgressView()
-            case .error:
-               
-                Text("An error occured")
-            default:
-                if let joke = viewModel.joke {
-                    Text(joke.setup)
-                }
-            }
-        }.onAppear() {
-            viewModel.getJoke()
-        }
+        JokeHost(viewModel: JokeViewModel(jokeRepository: repository))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: JokeViewModel(jokeRepository: JokeRepositoryImpl(service: NetworkManager())))
+        ContentView()
     }
 }

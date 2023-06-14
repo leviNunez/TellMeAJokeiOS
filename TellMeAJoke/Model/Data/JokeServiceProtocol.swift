@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkService {
+protocol JokeServiceProtocol {
     
     func fetch<T: Decodable>(urlString: String) async throws -> T
     
