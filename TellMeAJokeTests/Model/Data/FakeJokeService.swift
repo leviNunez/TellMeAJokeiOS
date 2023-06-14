@@ -1,28 +1,23 @@
 //
-//  Mockable.swift
+//  MockNetworkManager.swift
 //  TellMeAJokeTests
 //
 //  Created by Levi Nunez on 6/6/23.
 //
 
 import Foundation
+@testable import TellMeAJoke
 
-protocol Mockable: AnyObject {
-    var bundle: Bundle { get }
-    
-    func load<T: Decodable>(_ filename: String) -> T
-}
-
-extension Mockable {
-    var bundle: Bundle {
-        return Bundle(for: type(of: self))
+final class FakeJokeService: JokeServiceProtocol {
+    func fetch<T>(urlString: String = "") async throws -> T where T : Decodable {
+        return load("JokeResponse")
     }
     
     func load<T: Decodable>(_ filename: String) -> T {
+        let bundle = Bundle(for: type(of: self))
         let data: Data
         
-        guard let file = bundle.url(forResource: filename, withExtension: "json")
-        else {
+        guard let file = bundle.url(forResource: filename, withExtension: "json") else {
             fatalError("Couldn't find \(filename) in main bundle.")
         }
         

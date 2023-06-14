@@ -11,12 +11,12 @@ import Combine
 
 final class JokeRepositoryImplTest: XCTestCase {
     
-    private var service: NetworkService!
+    private var service: JokeServiceProtocol!
     private var repository: JokeRepositoryImpl!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
-        service = FakeNetworkManager()
+        service = FakeJokeService()
         repository = JokeRepositoryImpl(service: service)
     }
     
@@ -45,10 +45,11 @@ final class JokeRepositoryImplTest: XCTestCase {
             }.store(in: &cancellables)
         
         // Then
-        waitForExpectations(timeout: 1)
+        wait(for: [expectation])
         
         // Assert there were no errors thrown
         XCTAssertNil(error)
+        
         // Assert a Joke was returned
         XCTAssertEqual(joke?.setup, "What do you call a careful wolf?")
     }

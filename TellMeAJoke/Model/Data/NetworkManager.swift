@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class NetworkManager: NetworkService {
+final class NetworkManager: JokeServiceProtocol {
     
     func fetch<T>(urlString: String) async throws -> T where T : Decodable {
         
@@ -34,5 +34,5 @@ enum NetworkError: Error {
     case invalidURL
     case badResponse
     case decodingError
-    case other
+    case unknownError
 }
