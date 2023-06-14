@@ -17,6 +17,7 @@ struct JokeHost: View {
     var body: some View {
         ZStack {
             Color(AppResource.ThemeColor.primary)
+                .ignoresSafeArea()
             
             switch viewModel.uiState {
             case .loading:
@@ -33,8 +34,7 @@ struct JokeHost: View {
             case .error:
                 ErrorView(onRetry: { viewModel.getJoke() })
             }
-        }
-        .edgesIgnoringSafeArea(.all)
+        } 
         .onAppear() {
             viewModel.getJoke()
         }
