@@ -7,38 +7,27 @@
 
 import Foundation
 
-struct AppResource {
+struct Constant {
     static let baseURL = "https://official-joke-api.appspot.com/"
     
     enum Endpoint {
         static let randomJoke = "random_joke"
     }
     
-    enum ThemeColor {
-        static let primary = "PrimaryColor"
-        static let onPrimary = "OnPrimaryColor"
-        static let secondary = "SecondaryColor"
-        static let secondaryVariant = "SecondaryVariant"
-    }
-    
-    enum Font {
-        static let niceSugar = "Nice-Sugar"
-    }
-    
-    enum Image {
+    enum ImageName {
         static let questionMark = "QuestionMark"
         static let back = "Back"
         static let next = "Next"
         static let lighting = "Lighting"
         static let explosion = "Explosion"
         static let retry = "Retry"
-        
         static var randomLaugh: String {
-            "Laugh\(Int.random(in: 1...4))"
+            let randomInt = Int.random(in: 1...4)
+            return "Laugh\(randomInt)"
         }
     }
     
-    enum Text {
+    enum StringResource {
         static let appName = "Tell Me A Joke"
         static let loading = "Loading fast…"
         static let back = "Back"
@@ -47,7 +36,3 @@ struct AppResource {
         static let retry = "Retry"
     }
 }
-
-
-
-

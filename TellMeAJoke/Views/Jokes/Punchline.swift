@@ -14,7 +14,7 @@ struct Punchline: View {
     @State private var isTransitioning = false
     @State private var shouldShowControls = false
     
-    private let laughImage = AppResource.Image.randomLaugh
+    private let laughImage = Constant.ImageName.randomLaugh
     
     var body: some View {
         GeometryReader { proxy in
@@ -35,9 +35,9 @@ struct Punchline: View {
                 ZStack {
                     if shouldShowControls {
                         HStack {
-                            TextButton(imageName: AppResource.Image.back, title: AppResource.Text.back, onButtonPressed: onBackPressed)
+                            TextButton(imageName: Constant.ImageName.back, title: Constant.StringResource.back, onButtonPressed: onBackPressed)
                             Spacer()
-                            TextButton(imageName: AppResource.Image.next, title: AppResource.Text.next, onButtonPressed: onNextPressed)
+                            TextButton(imageName: Constant.ImageName.next, title: Constant.StringResource.next, onButtonPressed: onNextPressed)
                         }
                         .transition(.fadeInOut)
                         
@@ -74,13 +74,13 @@ struct Punchline_Previews: PreviewProvider {
     static var previews: some View {
         Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
             .previewDisplayName("Default")
         
         Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
     }
 }

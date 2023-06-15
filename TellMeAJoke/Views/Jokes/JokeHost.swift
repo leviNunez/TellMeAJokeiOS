@@ -16,7 +16,7 @@ struct JokeHost: View {
     
     var body: some View {
         ZStack {
-            Color(AppResource.ThemeColor.primary)
+            Color(AppTheme.Color.primary)
                 .ignoresSafeArea()
             
             switch viewModel.uiState {
@@ -45,6 +45,6 @@ struct JokeHost_Previews: PreviewProvider {
     static var previews: some View {
         JokeHost(viewModel: JokeViewModel(jokeRepository: JokeRepositoryImpl(service: NetworkManager())))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
     }
 }

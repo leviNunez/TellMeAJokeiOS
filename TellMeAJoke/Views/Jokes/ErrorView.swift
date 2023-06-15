@@ -12,15 +12,15 @@ struct ErrorView: View {
     
     var body: some View {
         VStack {
-            Image(AppResource.Image.explosion)
+            Image(Constant.ImageName.explosion)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .overlay {
-                    Text(AppResource.Text.error)
+                    Text(Constant.StringResource.error)
                         .modifier(JokeTextModifier(color: Color(.black)))
                 }
             
-            TextButton(imageName: AppResource.Image.retry, title: AppResource.Text.retry, onButtonPressed: onRetry)
+            TextButton(imageName: Constant.ImageName.retry, title: Constant.StringResource.retry, onButtonPressed: onRetry)
         }
         .transition(.fadeInOut)
         .padding(.horizontal, UIScreen.main.bounds.width < 350 ? 10 : 16)
@@ -33,12 +33,12 @@ struct Retry_Previews: PreviewProvider {
         ErrorView(onRetry: {})
             .previewDisplayName("Default")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
         
         ErrorView(onRetry: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
     }
 }

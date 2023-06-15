@@ -10,7 +10,7 @@ import Combine
 @testable import TellMeAJoke
 
 class FakeJokeRepository: JokeRepositoryProtocol {
-    private var service = FakeJokeService()
+    private var service = FakeNetworkManager()
     private var shouldReturnError: Bool
     
     init(shouldReturnError: Bool = false) {

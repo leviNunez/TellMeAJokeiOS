@@ -32,7 +32,7 @@ struct Setup: View {
      
                 Spacer()
                 
-                Image(AppResource.Image.questionMark)
+                Image(Constant.ImageName.questionMark)
                     .resizable()
                     .frame(width: 100, height: 100)
                     .rotationEffect(.degrees(rotationDegrees))
@@ -79,12 +79,12 @@ struct JokeSetup_Previews: PreviewProvider {
         Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
             .previewDisplayName("Default")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
         
         Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
     }
 }
