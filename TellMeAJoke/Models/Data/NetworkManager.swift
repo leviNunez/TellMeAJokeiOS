@@ -9,8 +9,11 @@ import Foundation
 import Combine
 
 final class NetworkManager: JokeServiceProtocol {
+    let baseURL = "https://official-joke-api.appspot.com/"
+    let randomJokeEndpoint = "random_joke"
     
-    func fetch<T>(urlString: String) async throws -> T where T : Decodable {
+    func fetchJoke<T>() async throws -> T where T : Decodable {
+        let urlString = baseURL + randomJokeEndpoint
         
         guard let url = URL(string: urlString) else {
             throw NetworkError.invalidURL
@@ -22,11 +25,11 @@ final class NetworkManager: JokeServiceProtocol {
             throw NetworkError.badResponse
         }
         
-        guard let decodedJoke = try? JSONDecoder().decode(T.self, from: data) else {
+        guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
             throw NetworkError.decodingError
         }
         
-        return decodedJoke
+        return decodedData
     }
 }
 

@@ -16,15 +16,13 @@ final class JokeRepositoryImpl: JokeRepositoryProtocol {
         self.service = service
     }
     
-    func getJoke() -> Future<Joke, Error> {
-        let url = Constant.baseURL + Constant.Endpoint.randomJoke
-        
+    func fetchJoke() -> Future<Joke, Error> {
         return Future {  promise in
             Task { [weak self] in
                 guard let self = self else { return promise(.failure(NetworkError.unknownError)) }
                 
                 do {
-                    let joke: Joke = try await self.service.fetch(urlString: url)
+                    let joke: Joke = try await self.service.fetchJoke()
                     promise(.success(joke))
                 } catch {
                     promise(.failure(error))

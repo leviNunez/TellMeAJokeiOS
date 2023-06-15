@@ -11,7 +11,7 @@ import Combine
 struct Setup: View {
     let text: String
     let onQuestionMarkPressed: () -> Void
-    @State private var publishers = Set<AnyCancellable>()
+    @State private var cancellables = Set<AnyCancellable>()
     @State private var yScale = 0.0
     @State private var rotationDegrees = 0.0
     @State private var isAboutToTransition = false
@@ -32,7 +32,7 @@ struct Setup: View {
      
                 Spacer()
                 
-                Image(Constant.ImageName.questionMark)
+                Image(ImageAsset.questionMark)
                     .resizable()
                     .frame(width: 100, height: 100)
                     .rotationEffect(.degrees(rotationDegrees))
@@ -42,14 +42,11 @@ struct Setup: View {
                     .opacity(isAboutToTransition ? 0 : 1)
                     .animation(.linear, value: isAboutToTransition)
                     .onTapGesture {
-                        isAboutToTransition = true
-                        publishers.first?.cancel()
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            onQuestionMarkPressed()
-                        }
+                        startPunchlineTransition()
                     }
-                    .onAppear() { startAnimationLoop() }
+                    .onAppear() {
+                        startAnimationLoop()
+                    }
                 
                 Spacer()
             }
@@ -58,6 +55,19 @@ struct Setup: View {
         }
         .padding(.horizontal)
         .transition(.fadeInOut)
+    }
+    
+    private func startPunchlineTransition() {
+        cancelAnimationLoop()
+        isAboutToTransition = true
+        let timeIntervalInSeconds = 0.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeIntervalInSeconds) {
+            onQuestionMarkPressed()
+        }
+    }
+    
+    private func cancelAnimationLoop() {
+        cancellables.first?.cancel()
     }
     
     private func startAnimationLoop() {
@@ -70,7 +80,7 @@ struct Setup: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     yScale = 0.0
                 }
-            }.store(in: &publishers)
+            }.store(in: &cancellables)
     }
 }
 
@@ -79,12 +89,12 @@ struct JokeSetup_Previews: PreviewProvider {
         Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
             .previewDisplayName("Default")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppTheme.Color.primary))
+            .background(Color(ColorAsset.primary))
         
         Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppTheme.Color.primary))
+            .background(Color(ColorAsset.primary))
     }
 }

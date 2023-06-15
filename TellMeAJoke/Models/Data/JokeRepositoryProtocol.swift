@@ -10,6 +10,6 @@ import Combine
 
 protocol JokeRepositoryProtocol {
     
-    func getJoke() -> Future<Joke, Error>
+    func fetchJoke() -> Future<Joke, Error>
     
 }

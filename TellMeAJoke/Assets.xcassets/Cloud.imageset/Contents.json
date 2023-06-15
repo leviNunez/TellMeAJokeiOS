@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_explosion.png",
+      "filename" : "Cloud.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_explosion@2x.png",
+      "filename" : "Cloud@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_explosion@3x.png",
+      "filename" : "Cloud@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

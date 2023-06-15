@@ -29,21 +29,22 @@ final class JokeViewModelTest: XCTestCase {
     @MainActor
     func test_getJoke_onSuccess_setsStateToShowSetup() {
         // Given
-        var state = viewModel.uiState
-        
-        // Assert that initial state is loading
-        XCTAssertEqual(state, .loading)
+        var states = [JokeUiState]()
         
         // When
         viewModel.getJoke()
         
         // Then
         viewModel.$uiState
-            .dropFirst()
-            .sink { value in
-                state = value
-                // Assert that state is set to showSetup
-                XCTAssertEqual(state, .showSetup)
+            .collect(2)
+            .sink { values in
+                states = values
+                
+                // Assert that the initial was loading
+                XCTAssertEqual(states[0], .loading)
+                
+                // Assert that the final state is showSetup
+                XCTAssertEqual(states[1], .showSetup)
             }.store(in: &cancellables)
     }
     
@@ -51,28 +52,29 @@ final class JokeViewModelTest: XCTestCase {
     func test_getJoke_onError_setsStateToError() {
         // Given
         repository = FakeJokeRepository(shouldReturnError: true)
-        var state = viewModel.uiState
-        
-        // Assert that initial state is loading
-        XCTAssertEqual(state, .loading)
+        var states = [JokeUiState]()
         
         // When
         viewModel.getJoke()
         
         // Then
         viewModel.$uiState
-            .dropFirst()
-            .sink { value in
-                state = value
-                // Assert that state is set to showSetup
-                XCTAssertEqual(state, .error)
+            .collect(2)
+            .sink { values in
+                states = values
+                
+                // Assert that the initial was loading
+                XCTAssertEqual(states[0], .loading)
+                
+                // Assert that the final state is error
+                XCTAssertEqual(states[1], .error)
             }.store(in: &cancellables)
     }
     
     @MainActor
     func test_revealPunchline_setsStateToShowPunchline() {
         // Given
-        var states = [JokeUIState]()
+        var states = [JokeUiState]()
         
         // When
         viewModel.getJoke()
@@ -83,10 +85,11 @@ final class JokeViewModelTest: XCTestCase {
             .collect(3)
             .sink { values in
                 states = values
-                // Assert that the initial state is loading
+                
+                // Assert that the initial was loading
                 XCTAssertEqual(states[0], .loading)
                 
-                // Assert that the state is set to showSetup
+                // Assert that the second state was showSetup
                 XCTAssertEqual(states[1], .showSetup)
                 
                 // Assert that the final state is showPunchline
@@ -97,7 +100,7 @@ final class JokeViewModelTest: XCTestCase {
     @MainActor
     func test_back_setsStateBackToShowSetup() {
         // Given
-        var states = [JokeUIState]()
+        var states = [JokeUiState]()
         
         // When
         viewModel.getJoke()
@@ -109,13 +112,13 @@ final class JokeViewModelTest: XCTestCase {
             .collect(4)
             .sink { values in
                 states = values
-                // Assert that the initial state is loading
+                // Assert that the initial state was loading
                 XCTAssertEqual(states[0], .loading)
                 
-                // Assert that the state is set to showSetup
+                // Assert that the second state was showSetup
                 XCTAssertEqual(states[1], .showSetup)
                 
-                // Assert that state is set to showPunchline
+                // Assert that the third state was showPunchline
                 XCTAssertEqual(states[2], .showPunchline)
                 
                 // Assert that the final state is showSetup
