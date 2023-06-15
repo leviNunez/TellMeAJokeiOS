@@ -12,20 +12,20 @@ struct Punchline: View {
     let onBackPressed: () -> Void
     let onNextPressed: () -> Void
     @State private var isTransitioning = false
-    @State private var shouldShowControls = false
-    
-    private let laughImage = Constant.ImageName.randomLaugh
+    @State private var shouldShowButtons = false
+    private let laughImage = ImageAsset.randomLaughImage()
     
     var body: some View {
         GeometryReader { proxy in
             let width = proxy.size.width
             let height = proxy.size.height
+            let buttonsContainerHeight = height * 0.13
             
             VStack {
                 Spacer()
                 
                 Text(text)
-                    .modifier(JokeTextModifier(size: 24)) 
+                    .modifier(JokeTextModifier(size: 24))
                     .scaleEffect(isTransitioning ? 1 : 4)
                     .animation(.linear, value: isTransitioning)
                     .transition(.fadeInOut)
@@ -33,11 +33,11 @@ struct Punchline: View {
                 Spacer()
                 
                 ZStack {
-                    if shouldShowControls {
+                    if shouldShowButtons {
                         HStack {
-                            TextButton(imageName: Constant.ImageName.back, title: Constant.StringResource.back, onButtonPressed: onBackPressed)
+                            ImageButton(imageName: ImageAsset.back, title: StringResource.back, onButtonPressed: onBackPressed)
                             Spacer()
-                            TextButton(imageName: Constant.ImageName.next, title: Constant.StringResource.next, onButtonPressed: onNextPressed)
+                            ImageButton(imageName: ImageAsset.next, title: StringResource.next, onButtonPressed: onNextPressed)
                         }
                         .transition(.fadeInOut)
                         
@@ -51,17 +51,16 @@ struct Punchline: View {
                         
                     }
                 }
-                .frame(height: height * 0.13)
-                .aspectRatio(contentMode: .fit)
+                .frame(height: buttonsContainerHeight)
                 
                 Spacer()
             }
             .frame(width: width, height: height)
             .onAppear() {
                 isTransitioning = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    shouldShowControls = true
+                let timeIntervalInSeconds = 1.5
+                DispatchQueue.main.asyncAfter(deadline: .now() + timeIntervalInSeconds) {
+                    shouldShowButtons = true
                 }
             }
             
@@ -74,13 +73,13 @@ struct Punchline_Previews: PreviewProvider {
     static var previews: some View {
         Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppTheme.Color.primary))
+            .background(Color(ColorAsset.primary))
             .previewDisplayName("Default")
         
         Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppTheme.Color.primary))
+            .background(Color(ColorAsset.primary))
     }
 }

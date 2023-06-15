@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5904699D2A2FC2660007FD69 /* JokeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5904699C2A2FC2660007FD69 /* JokeResponse.json */; };
-		590469A02A2FC2B30007FD69 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904699F2A2FC2B30007FD69 /* Constant.swift */; };
+		590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904699F2A2FC2B30007FD69 /* AppConstants.swift */; };
 		590469A22A2FC6830007FD69 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */; };
 		590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */; };
 		590469A82A2FCDF90007FD69 /* JokeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A72A2FCDF90007FD69 /* JokeRepositoryImpl.swift */; };
@@ -28,12 +28,11 @@
 		599A63052A3227AA00B5DE10 /* JokeHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599A63042A3227AA00B5DE10 /* JokeHost.swift */; };
 		599A63072A322DB200B5DE10 /* JokeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599A63062A322DB200B5DE10 /* JokeProgressView.swift */; };
 		599A63092A3247A900B5DE10 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599A63082A3247A900B5DE10 /* Setup.swift */; };
-		599A630C2A32553600B5DE10 /* TextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599A630B2A32553600B5DE10 /* TextButton.swift */; };
-		59A7D8D22A3A7FDB0022FD8C /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A7D8D12A3A7FDB0022FD8C /* AppTheme.swift */; };
+		599A630C2A32553600B5DE10 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599A630B2A32553600B5DE10 /* ImageButton.swift */; };
 		59AABAC82A33D68B00172CA8 /* Punchline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AABAC72A33D68B00172CA8 /* Punchline.swift */; };
 		59AF641F2A32A58800F81EAE /* NiceSugar.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59AF641E2A32A58800F81EAE /* NiceSugar.ttf */; };
 		59E2A37D2A3753AD001C3774 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2A37C2A3753AD001C3774 /* ErrorView.swift */; };
-		59EE38B22A34F7D300352C3D /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EE38B12A34F7D300352C3D /* Animation.swift */; };
+		59EE38B22A34F7D300352C3D /* AnimationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EE38B12A34F7D300352C3D /* AnimationExt.swift */; };
 		59EE38B42A350AC600352C3D /* JokeTextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EE38B32A350AC600352C3D /* JokeTextModifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,7 @@
 
 /* Begin PBXFileReference section */
 		5904699C2A2FC2660007FD69 /* JokeResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JokeResponse.json; sourceTree = "<group>"; };
-		5904699F2A2FC2B30007FD69 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		5904699F2A2FC2B30007FD69 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
 		590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryProtocol.swift; sourceTree = "<group>"; };
 		590469A72A2FCDF90007FD69 /* JokeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -80,12 +79,11 @@
 		599A63042A3227AA00B5DE10 /* JokeHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeHost.swift; sourceTree = "<group>"; };
 		599A63062A322DB200B5DE10 /* JokeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeProgressView.swift; sourceTree = "<group>"; };
 		599A63082A3247A900B5DE10 /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
-		599A630B2A32553600B5DE10 /* TextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButton.swift; sourceTree = "<group>"; };
-		59A7D8D12A3A7FDB0022FD8C /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		599A630B2A32553600B5DE10 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		59AABAC72A33D68B00172CA8 /* Punchline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Punchline.swift; sourceTree = "<group>"; };
 		59AF641E2A32A58800F81EAE /* NiceSugar.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NiceSugar.ttf; sourceTree = "<group>"; };
 		59E2A37C2A3753AD001C3774 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		59EE38B12A34F7D300352C3D /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		59EE38B12A34F7D300352C3D /* AnimationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExt.swift; sourceTree = "<group>"; };
 		59EE38B32A350AC600352C3D /* JokeTextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeTextModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,14 +122,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		5904699E2A2FC29F0007FD69 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				5904699F2A2FC2B30007FD69 /* Constant.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		592CA8882A2E6C75000FF91A = {
 			isa = PBXGroup;
 			children = (
@@ -156,10 +146,10 @@
 			isa = PBXGroup;
 			children = (
 				592CA8942A2E6C75000FF91A /* TellMeAJokeApp.swift */,
+				5904699F2A2FC2B30007FD69 /* AppConstants.swift */,
 				592CA8BF2A2E7436000FF91A /* Models */,
 				592CA8BE2A2E73D3000FF91A /* Views */,
 				592D33772A311617009E4C16 /* ViewModels */,
-				5904699E2A2FC29F0007FD69 /* Utils */,
 				595E9C502A32A00C009B45BE /* Fonts */,
 				592CA8982A2E6C76000FF91A /* Assets.xcassets */,
 				595E9C532A32A0FC009B45BE /* Info.plist */,
@@ -199,9 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				592CA8962A2E6C75000FF91A /* ContentView.swift */,
-				59A7D8D12A3A7FDB0022FD8C /* AppTheme.swift */,
 				599A63032A32274B00B5DE10 /* Jokes */,
-				599A630A2A32551600B5DE10 /* Helpers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,18 +255,11 @@
 				599A63082A3247A900B5DE10 /* Setup.swift */,
 				59AABAC72A33D68B00172CA8 /* Punchline.swift */,
 				59E2A37C2A3753AD001C3774 /* ErrorView.swift */,
+				599A630B2A32553600B5DE10 /* ImageButton.swift */,
+				59EE38B32A350AC600352C3D /* JokeTextModifier.swift */,
+				59EE38B12A34F7D300352C3D /* AnimationExt.swift */,
 			);
 			path = Jokes;
-			sourceTree = "<group>";
-		};
-		599A630A2A32551600B5DE10 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				59EE38B12A34F7D300352C3D /* Animation.swift */,
-				599A630B2A32553600B5DE10 /* TextButton.swift */,
-				59EE38B32A350AC600352C3D /* JokeTextModifier.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		59AABAC42A33C9B100172CA8 /* View */ = {
@@ -423,19 +404,18 @@
 				59AABAC82A33D68B00172CA8 /* Punchline.swift in Sources */,
 				592CA8972A2E6C75000FF91A /* ContentView.swift in Sources */,
 				592D33792A31163E009E4C16 /* JokeViewModel.swift in Sources */,
-				59A7D8D22A3A7FDB0022FD8C /* AppTheme.swift in Sources */,
 				592CA8952A2E6C75000FF91A /* TellMeAJokeApp.swift in Sources */,
 				599A63072A322DB200B5DE10 /* JokeProgressView.swift in Sources */,
 				599A63092A3247A900B5DE10 /* Setup.swift in Sources */,
 				592CA8ED2A2E9B15000FF91A /* NetworkManager.swift in Sources */,
 				59EE38B42A350AC600352C3D /* JokeTextModifier.swift in Sources */,
 				592CA8EB2A2E9984000FF91A /* JokeServiceProtocol.swift in Sources */,
-				599A630C2A32553600B5DE10 /* TextButton.swift in Sources */,
+				599A630C2A32553600B5DE10 /* ImageButton.swift in Sources */,
 				592CA8C12A2E7575000FF91A /* Joke.swift in Sources */,
 				599A63052A3227AA00B5DE10 /* JokeHost.swift in Sources */,
-				59EE38B22A34F7D300352C3D /* Animation.swift in Sources */,
+				59EE38B22A34F7D300352C3D /* AnimationExt.swift in Sources */,
 				59E2A37D2A3753AD001C3774 /* ErrorView.swift in Sources */,
-				590469A02A2FC2B30007FD69 /* Constant.swift in Sources */,
+				590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */,
 				590469A82A2FCDF90007FD69 /* JokeRepositoryImpl.swift in Sources */,
 				590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */,
 			);

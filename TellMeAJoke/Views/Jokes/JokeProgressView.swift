@@ -12,7 +12,7 @@ struct JokeProgressView: View {
     
     var body: some View {
         HStack {
-            Image(Constant.ImageName.lighting)
+            Image(ImageAsset.lighting)
                 .resizable()
                 .rotationEffect(.degrees(rotationDegrees))
                 .frame(width: 50, height: 50)
@@ -23,7 +23,7 @@ struct JokeProgressView: View {
                         }
                 }
 
-            Text(Constant.StringResource.loading)
+            Text(StringResource.loading)
                 .modifier(JokeTextModifier())
         }
     }
@@ -33,7 +33,7 @@ struct CustomProgressView_Previews: PreviewProvider {
     static var previews: some View {
             JokeProgressView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppTheme.Color.primary))
+            .background(Color(ColorAsset.primary))
     }
 }
 

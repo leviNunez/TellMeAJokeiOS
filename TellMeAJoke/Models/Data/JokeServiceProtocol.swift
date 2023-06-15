@@ -9,6 +9,6 @@ import Foundation
 
 protocol JokeServiceProtocol {
     
-    func fetch<T: Decodable>(urlString: String) async throws -> T
+    func fetchJoke<T: Decodable>() async throws -> T
     
 }

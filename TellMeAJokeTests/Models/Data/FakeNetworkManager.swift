@@ -9,7 +9,7 @@ import Foundation
 @testable import TellMeAJoke
 
 final class FakeNetworkManager: JokeServiceProtocol {
-    func fetch<T>(urlString: String = "") async throws -> T where T : Decodable {
+    func fetchJoke<T>() async throws -> T where T : Decodable {
         return load("JokeResponse")
     }
     

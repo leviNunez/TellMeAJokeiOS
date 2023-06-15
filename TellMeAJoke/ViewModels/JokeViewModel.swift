@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum JokeUIState {
+enum JokeUiState {
     case loading
     case showSetup
     case showPunchline
@@ -20,8 +20,7 @@ final class JokeViewModel: ObservableObject {
     private let jokeRepository: JokeRepositoryProtocol
     private var publishers = Set<AnyCancellable>()
     private(set) var joke: Joke?
-    @Published var uiState: JokeUIState = .loading
-    
+    @Published var uiState: JokeUiState = .loading
     
     init(jokeRepository: JokeRepositoryProtocol) {
         self.jokeRepository = jokeRepository
@@ -29,7 +28,7 @@ final class JokeViewModel: ObservableObject {
     
     func getJoke() {
         uiState = .loading
-        jokeRepository.getJoke()
+        jokeRepository.fetchJoke()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }

@@ -33,7 +33,7 @@ final class JokeRepositoryImplTest: XCTestCase {
         let expectation = expectation(description: "Publishes a joke")
         
         // When
-        repository.getJoke()
+        repository.fetchJoke()
             .sink { completion in
                 if case .failure(let netError) = completion {
                     error = netError

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct JokeTextModifier: ViewModifier {
     var size = 18.0
-    var color = Color(AppTheme.Color.onPrimary)
+    var color = Color(ColorAsset.onPrimary)
     func body(content: Content) -> some View {
         content
             .foregroundColor(color)
-            .font(Font.custom(AppTheme.Font.niceSugar, size: size))
+            .font(Font.custom(CustomFont.niceSugar, size: size))
             .multilineTextAlignment(.center)
     }
 }
