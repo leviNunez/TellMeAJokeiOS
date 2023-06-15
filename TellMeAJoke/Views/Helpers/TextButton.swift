@@ -21,16 +21,16 @@ struct TextButton: View {
                     onButtonPressed()
                 }
             Text(title)
-                .font(Font.custom(AppResource.Font.niceSugar, size: 18))
-                .foregroundColor(Color(AppResource.ThemeColor.onPrimary))
+                .font(Font.custom(AppTheme.Font.niceSugar, size: 18))
+                .foregroundColor(Color(AppTheme.Color.onPrimary))
         }
     }
 }
 
 struct ImageButton_Previews: PreviewProvider {
     static var previews: some View {
-        TextButton(imageName: AppResource.Image.questionMark, title: AppResource.Text.next, onButtonPressed: {})
+        TextButton(imageName: Constant.ImageName.questionMark, title: Constant.StringResource.next, onButtonPressed: {})
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(AppResource.ThemeColor.primary))
+            .background(Color(AppTheme.Color.primary))
     }
 }

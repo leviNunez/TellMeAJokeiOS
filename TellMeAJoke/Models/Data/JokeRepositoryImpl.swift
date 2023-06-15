@@ -17,7 +17,7 @@ final class JokeRepositoryImpl: JokeRepositoryProtocol {
     }
     
     func getJoke() -> Future<Joke, Error> {
-        let url = AppResource.baseURL + AppResource.Endpoint.randomJoke
+        let url = Constant.baseURL + Constant.Endpoint.randomJoke
         
         return Future {  promise in
             Task { [weak self] in

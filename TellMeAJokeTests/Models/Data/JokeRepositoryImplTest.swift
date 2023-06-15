@@ -16,7 +16,7 @@ final class JokeRepositoryImplTest: XCTestCase {
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
-        service = FakeJokeService()
+        service = FakeNetworkManager()
         repository = JokeRepositoryImpl(service: service)
     }
     
