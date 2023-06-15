@@ -136,9 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				592CA8932A2E6C75000FF91A /* TellMeAJoke */,
-				592CA8982A2E6C76000FF91A /* Assets.xcassets */,
-				595E9C532A32A0FC009B45BE /* Info.plist */,
-				592CA89A2A2E6C76000FF91A /* Preview Content */,
 				592CA8A42A2E6C76000FF91A /* TellMeAJokeTests */,
 				592CA8AE2A2E6C76000FF91A /* TellMeAJokeUITests */,
 				592CA8922A2E6C75000FF91A /* Products */,
@@ -164,6 +161,9 @@
 				592D33772A311617009E4C16 /* ViewModels */,
 				5904699E2A2FC29F0007FD69 /* Utils */,
 				595E9C502A32A00C009B45BE /* Fonts */,
+				592CA8982A2E6C76000FF91A /* Assets.xcassets */,
+				595E9C532A32A0FC009B45BE /* Info.plist */,
+				592CA89A2A2E6C76000FF91A /* Preview Content */,
 			);
 			path = TellMeAJoke;
 			sourceTree = "<group>";
