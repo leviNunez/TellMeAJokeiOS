@@ -9,7 +9,5 @@ import Foundation
 import Combine
 
 protocol JokeRepositoryProtocol {
-    
     func fetchJoke() -> Future<Joke, Error>
-    
 }

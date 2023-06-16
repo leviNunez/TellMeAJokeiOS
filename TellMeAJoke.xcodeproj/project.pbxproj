@@ -11,8 +11,8 @@
 		590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904699F2A2FC2B30007FD69 /* AppConstants.swift */; };
 		590469A22A2FC6830007FD69 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */; };
 		590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */; };
-		590469A82A2FCDF90007FD69 /* JokeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A72A2FCDF90007FD69 /* JokeRepositoryImpl.swift */; };
-		590469AA2A2FE5EF0007FD69 /* JokeRepositoryImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A92A2FE5EF0007FD69 /* JokeRepositoryImplTest.swift */; };
+		590469A82A2FCDF90007FD69 /* DefaultJokeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */; };
+		590469AA2A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A92A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift */; };
 		592CA8952A2E6C75000FF91A /* TellMeAJokeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8942A2E6C75000FF91A /* TellMeAJokeApp.swift */; };
 		592CA8972A2E6C75000FF91A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8962A2E6C75000FF91A /* ContentView.swift */; };
 		592CA8992A2E6C76000FF91A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592CA8982A2E6C76000FF91A /* Assets.xcassets */; };
@@ -58,8 +58,8 @@
 		5904699F2A2FC2B30007FD69 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
 		590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryProtocol.swift; sourceTree = "<group>"; };
-		590469A72A2FCDF90007FD69 /* JokeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryImpl.swift; sourceTree = "<group>"; };
-		590469A92A2FE5EF0007FD69 /* JokeRepositoryImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryImplTest.swift; sourceTree = "<group>"; };
+		590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJokeRepository.swift; sourceTree = "<group>"; };
+		590469A92A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJokeRepositoryTest.swift; sourceTree = "<group>"; };
 		592CA8912A2E6C75000FF91A /* TellMeAJoke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeAJoke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		592CA8942A2E6C75000FF91A /* TellMeAJokeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeAJokeApp.swift; sourceTree = "<group>"; };
 		592CA8962A2E6C75000FF91A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,16 +112,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		590469802A2F89360007FD69 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				590469A92A2FE5EF0007FD69 /* JokeRepositoryImplTest.swift */,
-				592D337E2A312A1A009E4C16 /* FakeJokeRepository.swift */,
-				590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		592CA8882A2E6C75000FF91A = {
 			isa = PBXGroup;
 			children = (
@@ -197,21 +187,22 @@
 		592CA8BF2A2E7436000FF91A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				592CA8C72A2E884D000FF91A /* Data */,
 				592CA8C02A2E7575000FF91A /* Joke.swift */,
+				590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */,
+				590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */,
+				592CA8EC2A2E9B15000FF91A /* NetworkManager.swift */,
+				592CA8EA2A2E9984000FF91A /* JokeServiceProtocol.swift */,
+				59477F3C2A3CE8EC003E3200 /* Repositories */,
+				592CA8C72A2E884D000FF91A /* Network */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		592CA8C72A2E884D000FF91A /* Data */ = {
+		592CA8C72A2E884D000FF91A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				590469A72A2FCDF90007FD69 /* JokeRepositoryImpl.swift */,
-				590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */,
-				592CA8EA2A2E9984000FF91A /* JokeServiceProtocol.swift */,
-				592CA8EC2A2E9B15000FF91A /* NetworkManager.swift */,
 			);
-			path = Data;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		592D33772A311617009E4C16 /* ViewModels */ = {
@@ -226,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				592D337B2A3122AB009E4C16 /* JokeViewModelTest.swift */,
+				592D337E2A312A1A009E4C16 /* FakeJokeRepository.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -234,9 +226,17 @@
 			isa = PBXGroup;
 			children = (
 				5904699C2A2FC2660007FD69 /* JokeResponse.json */,
-				590469802A2F89360007FD69 /* Data */,
+				590469A92A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift */,
+				590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		59477F3C2A3CE8EC003E3200 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		595E9C502A32A00C009B45BE /* Fonts */ = {
@@ -416,7 +416,7 @@
 				59EE38B22A34F7D300352C3D /* AnimationExt.swift in Sources */,
 				59E2A37D2A3753AD001C3774 /* ErrorView.swift in Sources */,
 				590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */,
-				590469A82A2FCDF90007FD69 /* JokeRepositoryImpl.swift in Sources */,
+				590469A82A2FCDF90007FD69 /* DefaultJokeRepository.swift in Sources */,
 				590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +427,7 @@
 			files = (
 				590469A22A2FC6830007FD69 /* FakeNetworkManager.swift in Sources */,
 				592D337F2A312A1A009E4C16 /* FakeJokeRepository.swift in Sources */,
-				590469AA2A2FE5EF0007FD69 /* JokeRepositoryImplTest.swift in Sources */,
+				590469AA2A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift in Sources */,
 				592D337C2A3122AB009E4C16 /* JokeViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

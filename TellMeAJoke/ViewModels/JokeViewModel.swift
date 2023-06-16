@@ -8,18 +8,18 @@
 import Foundation
 import Combine
 
-enum JokeUiState {
+enum JokeUiState: Equatable {
     case loading
-    case showSetup
-    case showPunchline
+    case showSetup(String)
+    case showPunchline(String)
     case error
 }
 
 @MainActor
 final class JokeViewModel: ObservableObject {
     private let jokeRepository: JokeRepositoryProtocol
-    private var publishers = Set<AnyCancellable>()
-    private(set) var joke: Joke?
+    private var cancellables = Set<AnyCancellable>()
+    private var joke: Joke?
     @Published var uiState: JokeUiState = .loading
     
     init(jokeRepository: JokeRepositoryProtocol) {
@@ -40,15 +40,23 @@ final class JokeViewModel: ObservableObject {
                 guard let self = self else { return }
                 
                 self.joke = value
-                self.uiState = .showSetup
-            }.store(in: &publishers)
+                revealSetup()
+            }.store(in: &cancellables)
+    }
+    
+    func revealSetup() {
+        guard let setup = joke?.setup else {
+            uiState = .error
+            return
+        }
+        uiState = .showSetup(setup)
     }
     
     func revealPunchline() {
-        uiState = .showPunchline
-    }
-    
-    func back() {
-        uiState = .showSetup
+        guard let punchline = joke?.punchline else {
+            uiState = .error
+            return
+        }
+        uiState = .showPunchline(punchline)
     }
 }

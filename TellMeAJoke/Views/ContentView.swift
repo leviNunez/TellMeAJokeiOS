@@ -12,7 +12,7 @@ struct ContentView: View {
     
     init() {
         let service = NetworkManager()
-        repository = JokeRepositoryImpl(service: service)
+        repository = DefaultJokeRepository(service: service)
     }
     
     var body: some View {

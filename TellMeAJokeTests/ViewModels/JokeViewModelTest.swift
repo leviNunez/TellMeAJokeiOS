@@ -10,7 +10,6 @@ import Combine
 @testable import TellMeAJoke
 
 final class JokeViewModelTest: XCTestCase {
-    
     private var repository: JokeRepositoryProtocol!
     private var viewModel: JokeViewModel!
     private var cancellables = Set<AnyCancellable>()
@@ -44,7 +43,7 @@ final class JokeViewModelTest: XCTestCase {
                 XCTAssertEqual(states[0], .loading)
                 
                 // Assert that the final state is showSetup
-                XCTAssertEqual(states[1], .showSetup)
+                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
             }.store(in: &cancellables)
     }
     
@@ -90,10 +89,10 @@ final class JokeViewModelTest: XCTestCase {
                 XCTAssertEqual(states[0], .loading)
                 
                 // Assert that the second state was showSetup
-                XCTAssertEqual(states[1], .showSetup)
+                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
                 
                 // Assert that the final state is showPunchline
-                XCTAssertEqual(states[2], .showPunchline)
+                XCTAssertEqual(states[2], .showPunchline(Joke.example.punchline))
             }.store(in: &cancellables)
     }
     
@@ -105,7 +104,7 @@ final class JokeViewModelTest: XCTestCase {
         // When
         viewModel.getJoke()
         viewModel.revealPunchline()
-        viewModel.back()
+        viewModel.revealSetup()
         
         // Then
         viewModel.$uiState
@@ -116,13 +115,13 @@ final class JokeViewModelTest: XCTestCase {
                 XCTAssertEqual(states[0], .loading)
                 
                 // Assert that the second state was showSetup
-                XCTAssertEqual(states[1], .showSetup)
+                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
                 
                 // Assert that the third state was showPunchline
-                XCTAssertEqual(states[2], .showPunchline)
+                XCTAssertEqual(states[2], .showPunchline(Joke.example.punchline))
                 
                 // Assert that the final state is showSetup
-                XCTAssertEqual(states[3], .showSetup)
+                XCTAssertEqual(states[3], .showSetup(Joke.example.setup))
             }.store(in: &cancellables)
     }
 }

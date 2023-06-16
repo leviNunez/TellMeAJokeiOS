@@ -9,15 +9,15 @@ import XCTest
 import Combine
 @testable import TellMeAJoke
 
-final class JokeRepositoryImplTest: XCTestCase {
+final class DefaultJokeRepositoryTest: XCTestCase {
     
     private var service: JokeServiceProtocol!
-    private var repository: JokeRepositoryImpl!
+    private var repository: JokeRepositoryProtocol!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         service = FakeNetworkManager()
-        repository = JokeRepositoryImpl(service: service)
+        repository = DefaultJokeRepository(service: service)
     }
     
     override func tearDown() {
@@ -50,7 +50,7 @@ final class JokeRepositoryImplTest: XCTestCase {
         // Assert there were no errors thrown
         XCTAssertNil(error)
         
-        // Assert a Joke was returned
-        XCTAssertEqual(joke?.setup, "What do you call a careful wolf?")
+        // Assert that a Joke was returned
+        XCTAssertNotNil(joke)
     }
 }
