@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class JokeRepositoryImpl: JokeRepositoryProtocol {
+final class DefaultJokeRepository: JokeRepositoryProtocol {
     
     private let service: JokeServiceProtocol
     

@@ -22,14 +22,14 @@ struct JokeHost: View {
             switch viewModel.uiState {
             case .loading:
                 JokeProgressView()
-            case .showSetup:
+            case .showSetup(let setup):
                 Setup(
-                    text: viewModel.joke!.setup,
+                    text: setup,
                     onQuestionMarkPressed: { viewModel.revealPunchline() })
-            case .showPunchline:
+            case .showPunchline(let punchline):
                 Punchline(
-                    text: viewModel.joke!.punchline,
-                    onBackPressed: { viewModel.back() },
+                    text: punchline,
+                    onBackPressed: { viewModel.revealSetup() },
                     onNextPressed: { viewModel.getJoke() })
             case .error:
                 ErrorView(onRetry: { viewModel.getJoke() })
@@ -43,7 +43,7 @@ struct JokeHost: View {
 
 struct JokeHost_Previews: PreviewProvider {
     static var previews: some View {
-        JokeHost(viewModel: JokeViewModel(jokeRepository: JokeRepositoryImpl(service: NetworkManager())))
+        JokeHost(viewModel: JokeViewModel(jokeRepository: DefaultJokeRepository(service: NetworkManager())))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
     }
