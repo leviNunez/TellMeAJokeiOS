@@ -30,13 +30,13 @@ struct JokeHost: View {
                 Punchline(
                     text: punchline,
                     onBackPressed: { viewModel.revealSetup() },
-                    onNextPressed: { viewModel.getJoke() })
+                    onNextPressed: { viewModel.fetchJoke() })
             case .error:
-                ErrorView(onRetry: { viewModel.getJoke() })
+                ErrorView(onRetry: { viewModel.fetchJoke() })
             }
         } 
         .onAppear() {
-            viewModel.getJoke()
+            viewModel.fetchJoke()
         }
     }
 }

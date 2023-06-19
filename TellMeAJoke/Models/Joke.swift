@@ -8,12 +8,18 @@
 import Foundation
 
 struct Joke: Decodable {
-    let type, setup, punchline: String
     let id: Int
+    let setup, punchline: String
+    let type: Category
+    
+    enum Category: String, CaseIterable, Decodable {
+        case general = "general"
+        case programming = "programming"
+    }
     
     static var example = Joke(
-        type: "general",
+        id: 332,
         setup: "Why did the house go to the doctor?",
         punchline: "It was having window panes.",
-        id: 332)
+        type: .general)
 }

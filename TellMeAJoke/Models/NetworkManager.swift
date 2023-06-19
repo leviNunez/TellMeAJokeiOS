@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class NetworkManager: JokeServiceProtocol {
+final class NetworkManager: JokeService {
     let baseURL = "https://official-joke-api.appspot.com/"
     let randomJokeEndpoint = "random_joke"
     

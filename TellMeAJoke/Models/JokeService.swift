@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol JokeServiceProtocol {
+protocol JokeService {
     func fetchJoke<T: Decodable>() async throws -> T
 }

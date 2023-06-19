@@ -17,18 +17,18 @@ enum JokeUiState: Equatable {
 
 @MainActor
 final class JokeViewModel: ObservableObject {
-    private let jokeRepository: JokeRepositoryProtocol
+    private let repository: JokeRepository
     private var cancellables = Set<AnyCancellable>()
     private var joke: Joke?
     @Published var uiState: JokeUiState = .loading
     
-    init(jokeRepository: JokeRepositoryProtocol) {
-        self.jokeRepository = jokeRepository
+    init(jokeRepository: JokeRepository) {
+        self.repository = jokeRepository
     }
     
-    func getJoke() {
+    func fetchJoke() {
         uiState = .loading
-        jokeRepository.fetchJoke()
+        repository.fetchJoke()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }

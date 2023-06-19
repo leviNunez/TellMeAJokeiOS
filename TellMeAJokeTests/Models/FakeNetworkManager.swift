@@ -8,7 +8,7 @@
 import Foundation
 @testable import TellMeAJoke
 
-final class FakeNetworkManager: JokeServiceProtocol {
+final class FakeNetworkManager: JokeService {
     func fetchJoke<T>() async throws -> T where T : Decodable {
         return load("JokeResponse")
     }

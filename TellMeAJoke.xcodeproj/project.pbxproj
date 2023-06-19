@@ -10,7 +10,7 @@
 		5904699D2A2FC2660007FD69 /* JokeResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5904699C2A2FC2660007FD69 /* JokeResponse.json */; };
 		590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5904699F2A2FC2B30007FD69 /* AppConstants.swift */; };
 		590469A22A2FC6830007FD69 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */; };
-		590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */; };
+		590469A62A2FCCFD0007FD69 /* JokeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A52A2FCCFD0007FD69 /* JokeRepository.swift */; };
 		590469A82A2FCDF90007FD69 /* DefaultJokeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */; };
 		590469AA2A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590469A92A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift */; };
 		592CA8952A2E6C75000FF91A /* TellMeAJokeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8942A2E6C75000FF91A /* TellMeAJokeApp.swift */; };
@@ -20,7 +20,7 @@
 		592CA8B02A2E6C76000FF91A /* TellMeAJokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8AF2A2E6C76000FF91A /* TellMeAJokeUITests.swift */; };
 		592CA8B22A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8B12A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift */; };
 		592CA8C12A2E7575000FF91A /* Joke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8C02A2E7575000FF91A /* Joke.swift */; };
-		592CA8EB2A2E9984000FF91A /* JokeServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8EA2A2E9984000FF91A /* JokeServiceProtocol.swift */; };
+		592CA8EB2A2E9984000FF91A /* JokeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8EA2A2E9984000FF91A /* JokeService.swift */; };
 		592CA8ED2A2E9B15000FF91A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592CA8EC2A2E9B15000FF91A /* NetworkManager.swift */; };
 		592D33792A31163E009E4C16 /* JokeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592D33782A31163E009E4C16 /* JokeViewModel.swift */; };
 		592D337C2A3122AB009E4C16 /* JokeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592D337B2A3122AB009E4C16 /* JokeViewModelTest.swift */; };
@@ -57,7 +57,7 @@
 		5904699C2A2FC2660007FD69 /* JokeResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = JokeResponse.json; sourceTree = "<group>"; };
 		5904699F2A2FC2B30007FD69 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		590469A12A2FC6830007FD69 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
-		590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepositoryProtocol.swift; sourceTree = "<group>"; };
+		590469A52A2FCCFD0007FD69 /* JokeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRepository.swift; sourceTree = "<group>"; };
 		590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJokeRepository.swift; sourceTree = "<group>"; };
 		590469A92A2FE5EF0007FD69 /* DefaultJokeRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultJokeRepositoryTest.swift; sourceTree = "<group>"; };
 		592CA8912A2E6C75000FF91A /* TellMeAJoke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeAJoke.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +70,7 @@
 		592CA8AF2A2E6C76000FF91A /* TellMeAJokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeAJokeUITests.swift; sourceTree = "<group>"; };
 		592CA8B12A2E6C76000FF91A /* TellMeAJokeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TellMeAJokeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		592CA8C02A2E7575000FF91A /* Joke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joke.swift; sourceTree = "<group>"; };
-		592CA8EA2A2E9984000FF91A /* JokeServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeServiceProtocol.swift; sourceTree = "<group>"; };
+		592CA8EA2A2E9984000FF91A /* JokeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeService.swift; sourceTree = "<group>"; };
 		592CA8EC2A2E9B15000FF91A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		592D33782A31163E009E4C16 /* JokeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeViewModel.swift; sourceTree = "<group>"; };
 		592D337B2A3122AB009E4C16 /* JokeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeViewModelTest.swift; sourceTree = "<group>"; };
@@ -188,9 +188,9 @@
 			children = (
 				592CA8C02A2E7575000FF91A /* Joke.swift */,
 				590469A72A2FCDF90007FD69 /* DefaultJokeRepository.swift */,
-				590469A52A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift */,
+				590469A52A2FCCFD0007FD69 /* JokeRepository.swift */,
 				592CA8EC2A2E9B15000FF91A /* NetworkManager.swift */,
-				592CA8EA2A2E9984000FF91A /* JokeServiceProtocol.swift */,
+				592CA8EA2A2E9984000FF91A /* JokeService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				599A63092A3247A900B5DE10 /* Setup.swift in Sources */,
 				592CA8ED2A2E9B15000FF91A /* NetworkManager.swift in Sources */,
 				59EE38B42A350AC600352C3D /* JokeTextModifier.swift in Sources */,
-				592CA8EB2A2E9984000FF91A /* JokeServiceProtocol.swift in Sources */,
+				592CA8EB2A2E9984000FF91A /* JokeService.swift in Sources */,
 				599A630C2A32553600B5DE10 /* ImageButton.swift in Sources */,
 				592CA8C12A2E7575000FF91A /* Joke.swift in Sources */,
 				599A63052A3227AA00B5DE10 /* JokeHost.swift in Sources */,
@@ -393,7 +393,7 @@
 				59E2A37D2A3753AD001C3774 /* ErrorView.swift in Sources */,
 				590469A02A2FC2B30007FD69 /* AppConstants.swift in Sources */,
 				590469A82A2FCDF90007FD69 /* DefaultJokeRepository.swift in Sources */,
-				590469A62A2FCCFD0007FD69 /* JokeRepositoryProtocol.swift in Sources */,
+				590469A62A2FCCFD0007FD69 /* JokeRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

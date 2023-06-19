@@ -9,7 +9,7 @@ import Foundation
 import Combine
 @testable import TellMeAJoke
 
-class FakeJokeRepository: JokeRepositoryProtocol {
+class FakeJokeRepository: JokeRepository {
     private var service = FakeNetworkManager()
     private var shouldReturnError: Bool
     

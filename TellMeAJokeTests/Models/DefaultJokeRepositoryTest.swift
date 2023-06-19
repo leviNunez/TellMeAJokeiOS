@@ -11,8 +11,8 @@ import Combine
 
 final class DefaultJokeRepositoryTest: XCTestCase {
     
-    private var service: JokeServiceProtocol!
-    private var repository: JokeRepositoryProtocol!
+    private var service: JokeService!
+    private var repository: JokeRepository!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {

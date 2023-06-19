@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let repository: JokeRepositoryProtocol
+    private let repository: JokeRepository
     
     init() {
         let service = NetworkManager()

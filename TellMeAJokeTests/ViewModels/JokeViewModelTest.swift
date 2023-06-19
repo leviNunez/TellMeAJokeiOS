@@ -10,7 +10,7 @@ import Combine
 @testable import TellMeAJoke
 
 final class JokeViewModelTest: XCTestCase {
-    private var repository: JokeRepositoryProtocol!
+    private var repository: JokeRepository!
     private var viewModel: JokeViewModel!
     private var cancellables = Set<AnyCancellable>()
     
@@ -31,7 +31,7 @@ final class JokeViewModelTest: XCTestCase {
         var states = [JokeUiState]()
         
         // When
-        viewModel.getJoke()
+        viewModel.fetchJoke()
         
         // Then
         viewModel.$uiState
@@ -54,7 +54,7 @@ final class JokeViewModelTest: XCTestCase {
         var states = [JokeUiState]()
         
         // When
-        viewModel.getJoke()
+        viewModel.fetchJoke()
         
         // Then
         viewModel.$uiState
@@ -76,7 +76,7 @@ final class JokeViewModelTest: XCTestCase {
         var states = [JokeUiState]()
         
         // When
-        viewModel.getJoke()
+        viewModel.fetchJoke()
         viewModel.revealPunchline()
         
         // Then
@@ -102,7 +102,7 @@ final class JokeViewModelTest: XCTestCase {
         var states = [JokeUiState]()
         
         // When
-        viewModel.getJoke()
+        viewModel.fetchJoke()
         viewModel.revealPunchline()
         viewModel.revealSetup()
         
