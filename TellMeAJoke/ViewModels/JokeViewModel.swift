@@ -10,25 +10,28 @@ import Combine
 
 enum JokeUiState: Equatable {
     case loading
+    case error
     case showSetup(String)
     case showPunchline(String)
-    case error
 }
 
 @MainActor
 final class JokeViewModel: ObservableObject {
     private let repository: JokeRepository
+    private let category: String
+    private var jokes = [Joke]()
+    private var currentJokeIndex = 0
     private var cancellables = Set<AnyCancellable>()
-    private var joke: Joke?
     @Published var uiState: JokeUiState = .loading
     
-    init(jokeRepository: JokeRepository) {
-        self.repository = jokeRepository
+    init(repository: JokeRepository, category: String) {
+        self.repository = repository
+        self.category = category
     }
     
-    func fetchJoke() {
+    func fetchJokes() {
         uiState = .loading
-        repository.fetchJoke()
+        repository.fetchJokes(by: category)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
@@ -39,24 +42,26 @@ final class JokeViewModel: ObservableObject {
             } receiveValue: { [weak self]  value in
                 guard let self = self else { return }
                 
-                self.joke = value
+                self.jokes = value
                 revealSetup()
             }.store(in: &cancellables)
     }
     
     func revealSetup() {
-        guard let setup = joke?.setup else {
-            uiState = .error
-            return
-        }
-        uiState = .showSetup(setup)
+        uiState = .showSetup(jokes[currentJokeIndex].setup)
     }
     
     func revealPunchline() {
-        guard let punchline = joke?.punchline else {
-            uiState = .error
-            return
+        uiState = .showPunchline(jokes[currentJokeIndex].punchline)
+    }
+    
+    func nextJoke() {
+        if currentJokeIndex < jokes.count - 1 {
+            currentJokeIndex += 1
+            revealSetup()
+        } else {
+            currentJokeIndex = 0
+            fetchJokes()
         }
-        uiState = .showPunchline(punchline)
     }
 }

@@ -30,20 +30,20 @@ struct JokeHost: View {
                 Punchline(
                     text: punchline,
                     onBackPressed: { viewModel.revealSetup() },
-                    onNextPressed: { viewModel.fetchJoke() })
+                    onNextPressed: { viewModel.nextJoke() })
             case .error:
-                ErrorView(onRetry: { viewModel.fetchJoke() })
+                ErrorView(onRetry: { viewModel.fetchJokes() })
             }
         } 
         .onAppear() {
-            viewModel.fetchJoke()
+            viewModel.fetchJokes()
         }
     }
 }
 
 struct JokeHost_Previews: PreviewProvider {
     static var previews: some View {
-        JokeHost(viewModel: JokeViewModel(jokeRepository: DefaultJokeRepository(service: NetworkManager())))
+        JokeHost(viewModel: JokeViewModel(repository: DefaultJokeRepository(service: NetworkManager()), category: Joke.Category.programming.rawValue ))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
     }

@@ -16,7 +16,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        JokeHost(viewModel: JokeViewModel(jokeRepository: repository))
+        JokeHost(viewModel: JokeViewModel(repository: repository, category: Joke.Category.programming.rawValue))
     }
 }
 

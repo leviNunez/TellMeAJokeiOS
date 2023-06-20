@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct JokeResponse: Decodable {
+    let jokes: [Joke]
+}
+
 struct Joke: Decodable {
     let id: Int
     let setup, punchline: String
@@ -18,8 +22,8 @@ struct Joke: Decodable {
     }
     
     static var example = Joke(
-        id: 332,
-        setup: "Why did the house go to the doctor?",
-        punchline: "It was having window panes.",
-        type: .general)
+        id: 398,
+        setup: "Where did the API go to eat?",
+        punchline: "To the RESTaurant.",
+        type: .programming)
 }

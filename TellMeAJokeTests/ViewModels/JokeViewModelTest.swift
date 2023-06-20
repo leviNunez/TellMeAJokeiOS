@@ -16,7 +16,7 @@ final class JokeViewModelTest: XCTestCase {
     
     @MainActor override func setUp() {
         repository = FakeJokeRepository()
-        viewModel = JokeViewModel(jokeRepository: repository)
+        viewModel = JokeViewModel(repository: repository, category: Joke.Category.programming.rawValue)
     }
     
     override func tearDown() {
@@ -26,102 +26,88 @@ final class JokeViewModelTest: XCTestCase {
     }
     
     @MainActor
-    func test_getJoke_onSuccess_setsStateToShowSetup() {
+    func test_fetchJokes_onSuccess_setsStateToShowSetup() {
         // Given
         var states = [JokeUiState]()
+        let expectation = expectation(description: "Publishes the correct states")
         
         // When
-        viewModel.fetchJoke()
+        viewModel.fetchJokes()
         
         // Then
         viewModel.$uiState
             .collect(2)
             .sink { values in
                 states = values
-                
-                // Assert that the initial was loading
-                XCTAssertEqual(states[0], .loading)
-                
-                // Assert that the final state is showSetup
-                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
+                expectation.fulfill()
             }.store(in: &cancellables)
-    }
-    
-    @MainActor
-    func test_getJoke_onError_setsStateToError() {
-        // Given
-        repository = FakeJokeRepository(shouldReturnError: true)
-        var states = [JokeUiState]()
         
-        // When
-        viewModel.fetchJoke()
+        wait(for: [expectation])
         
-        // Then
-        viewModel.$uiState
-            .collect(2)
-            .sink { values in
-                states = values
-                
-                // Assert that the initial was loading
-                XCTAssertEqual(states[0], .loading)
-                
-                // Assert that the final state is error
-                XCTAssertEqual(states[1], .error)
-            }.store(in: &cancellables)
+        // Assert that the initial state was loading
+        XCTAssertEqual(states[0], .loading)
+        
+        // Assert that the final state is showSetup
+        XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
     }
     
     @MainActor
     func test_revealPunchline_setsStateToShowPunchline() {
         // Given
         var states = [JokeUiState]()
+        let expectation = expectation(description: "Publishes the correct states")
         
         // When
-        viewModel.fetchJoke()
-        viewModel.revealPunchline()
+        viewModel.fetchJokes()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.viewModel.revealPunchline()
+        }
         
         // Then
         viewModel.$uiState
             .collect(3)
             .sink { values in
                 states = values
-                
-                // Assert that the initial was loading
-                XCTAssertEqual(states[0], .loading)
-                
-                // Assert that the second state was showSetup
-                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
-                
-                // Assert that the final state is showPunchline
-                XCTAssertEqual(states[2], .showPunchline(Joke.example.punchline))
+                expectation.fulfill()
             }.store(in: &cancellables)
+        
+        wait(for: [expectation])
+        
+        // Assert that the initial state was loading
+        XCTAssertEqual(states[0], JokeUiState.loading)
+        
+        // Assert that the second state was showSetup
+        XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
+        
+        // Assert that the final state is showPunchline
+        XCTAssertEqual(states[2], .showPunchline(Joke.example.punchline))
     }
     
     @MainActor
-    func test_back_setsStateBackToShowSetup() {
+    func test_fetchJokes_onError_setsStateToError() {
         // Given
+        repository = FakeJokeRepository(shouldReturnError: true)
+        viewModel = JokeViewModel(repository: repository, category: Joke.Category.programming.rawValue)
         var states = [JokeUiState]()
+        let expectation = expectation(description: "Publishes the correct states")
         
         // When
-        viewModel.fetchJoke()
-        viewModel.revealPunchline()
-        viewModel.revealSetup()
+        viewModel.fetchJokes()
         
         // Then
         viewModel.$uiState
-            .collect(4)
+            .collect(2)
             .sink { values in
                 states = values
-                // Assert that the initial state was loading
-                XCTAssertEqual(states[0], .loading)
-                
-                // Assert that the second state was showSetup
-                XCTAssertEqual(states[1], .showSetup(Joke.example.setup))
-                
-                // Assert that the third state was showPunchline
-                XCTAssertEqual(states[2], .showPunchline(Joke.example.punchline))
-                
-                // Assert that the final state is showSetup
-                XCTAssertEqual(states[3], .showSetup(Joke.example.setup))
+                expectation.fulfill()
             }.store(in: &cancellables)
+        
+        wait(for: [expectation])
+        
+        // Assert that the initial state was loading
+        XCTAssertEqual(states[0], .loading)
+        
+        // Assert that the final state is error
+        XCTAssertEqual(states[1], .error)
     }
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol JokeService {
-    func fetchJoke<T: Decodable>() async throws -> T
+    func fetchJokes<T: Decodable>(by type: String) async throws -> T
 }

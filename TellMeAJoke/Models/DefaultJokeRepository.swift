@@ -16,14 +16,14 @@ final class DefaultJokeRepository: JokeRepository {
         self.service = service
     }
     
-    func fetchJoke() -> Future<Joke, Error> {
+    func fetchJokes(by type: String) -> Future<[Joke], Error> {
         return Future {  promise in
             Task { [weak self] in
                 guard let self = self else { return promise(.failure(NetworkError.unknownError)) }
                 
                 do {
-                    let joke: Joke = try await self.service.fetchJoke()
-                    promise(.success(joke))
+                    let jokes: [Joke] = try await self.service.fetchJokes(by: type)
+                    promise(.success(jokes))
                 } catch {
                     promise(.failure(error))
                 }
