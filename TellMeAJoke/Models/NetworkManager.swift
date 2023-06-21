@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class NetworkManager: JokeService {
+final class NetworkManager: JokesService {
     let baseURL = "https://official-joke-api.appspot.com/jokes/"
     
     func fetchJokes<T>(by type: String) async throws -> T where T : Decodable {

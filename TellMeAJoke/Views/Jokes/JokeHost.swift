@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct JokeHost: View {
-    @StateObject private var viewModel: JokeViewModel
+    @StateObject private var viewModel: JokesViewModel
     
-    init(viewModel: @autoclosure @escaping () -> JokeViewModel) {
+    init(viewModel: @autoclosure @escaping () -> JokesViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel())
     }
     
@@ -43,7 +43,7 @@ struct JokeHost: View {
 
 struct JokeHost_Previews: PreviewProvider {
     static var previews: some View {
-        JokeHost(viewModel: JokeViewModel(repository: DefaultJokeRepository(service: NetworkManager()), category: Joke.Category.programming.rawValue ))
+        JokeHost(viewModel: JokesViewModel(repository: DefaultJokesRepository(service: NetworkManager()), category: Joke.Category.programming))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
     }

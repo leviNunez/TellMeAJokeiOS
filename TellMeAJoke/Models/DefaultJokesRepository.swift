@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-final class DefaultJokeRepository: JokeRepository {
+final class DefaultJokesRepository: JokesRepository {
     
-    private let service: JokeService
+    private let service: JokesService
     
-    init(service: JokeService) {
+    init(service: JokesService) {
         self.service = service
     }
     

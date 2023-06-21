@@ -8,6 +8,6 @@
 import Foundation
 import Combine
 
-protocol JokeRepository {
+protocol JokesRepository {
     func fetchJokes(by type: String) -> Future<[Joke], Error>
 }

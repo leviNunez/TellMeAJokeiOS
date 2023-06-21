@@ -8,30 +8,42 @@
 import Foundation
 import Combine
 
-enum JokeUiState: Equatable {
-    case loading
-    case error
-    case showSetup(String)
-    case showPunchline(String)
+enum JokesUiState: Equatable {
+    case loading, error
+    case showSetup(String), showPunchline(String)
 }
 
 @MainActor
-final class JokeViewModel: ObservableObject {
-    private let repository: JokeRepository
-    private let category: String
-    private var jokes = [Joke]()
+final class JokesViewModel: ObservableObject {
+    private let repository: JokesRepository
+    private let category: Joke.Category
     private var currentJokeIndex = 0
+    private var jokes = [Joke]()
+    @Published var uiState: JokesUiState = .loading
     private var cancellables = Set<AnyCancellable>()
-    @Published var uiState: JokeUiState = .loading
     
-    init(repository: JokeRepository, category: String) {
+    init(repository: JokesRepository, category: Joke.Category) {
         self.repository = repository
         self.category = category
     }
     
+    func nextJoke() {
+        if currentJokeIndex < jokes.count - 1 {
+            currentJokeIndex += 1
+            revealSetup()
+        } else {
+            fetchJokes()
+        }
+    }
+    
+    func revealSetup() {
+        uiState = .showSetup(jokes[currentJokeIndex].setup)
+    }
+    
     func fetchJokes() {
         uiState = .loading
-        repository.fetchJokes(by: category)
+        currentJokeIndex = 0
+        repository.fetchJokes(by: category.rawValue)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
@@ -47,21 +59,7 @@ final class JokeViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
     
-    func revealSetup() {
-        uiState = .showSetup(jokes[currentJokeIndex].setup)
-    }
-    
     func revealPunchline() {
         uiState = .showPunchline(jokes[currentJokeIndex].punchline)
-    }
-    
-    func nextJoke() {
-        if currentJokeIndex < jokes.count - 1 {
-            currentJokeIndex += 1
-            revealSetup()
-        } else {
-            currentJokeIndex = 0
-            fetchJokes()
-        }
     }
 }

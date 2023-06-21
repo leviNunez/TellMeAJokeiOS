@@ -11,13 +11,13 @@ import Combine
 
 final class DefaultJokeRepositoryTest: XCTestCase {
     
-    private var service: JokeService!
-    private var repository: JokeRepository!
+    private var service: JokesService!
+    private var repository: JokesRepository!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         service = FakeNetworkManager()
-        repository = DefaultJokeRepository(service: service)
+        repository = DefaultJokesRepository(service: service)
     }
     
     override func tearDown() {
