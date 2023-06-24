@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ErrorView: View {
-    let onRetry: () -> Void
+    var onRetry: () -> Void
     
     var body: some View {
         VStack {
@@ -24,7 +24,7 @@ struct ErrorView: View {
             
             Spacer()
             
-            ImageButton(imageName: ImageAsset.retry, title: StringResource.retry, onButtonPressed: onRetry)
+            ImageButton(image: ImageAsset.retry, title: StringResource.retry, onPressed: onRetry)
             
             Spacer()
         }

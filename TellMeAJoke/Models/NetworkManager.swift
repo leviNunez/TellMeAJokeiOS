@@ -10,9 +10,10 @@ import Combine
 
 final class NetworkManager: JokesService {
     let baseURL = "https://official-joke-api.appspot.com/jokes/"
+    let quantity = "ten"
     
     func fetchJokes<T>(by type: String) async throws -> T where T : Decodable {
-        let urlString = baseURL + "\(type)/ten"
+        let urlString = baseURL + "\(type)/\(quantity)"
         
         guard let url = URL(string: urlString) else {
             throw NetworkError.invalidURL

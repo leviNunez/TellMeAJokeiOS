@@ -12,11 +12,12 @@ import Combine
 final class JokeViewModelTest: XCTestCase {
     private var repository: JokesRepository!
     private var viewModel: JokesViewModel!
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables = [AnyCancellable]()
+    private let category = Joke.Category.programming.rawValue
     
     @MainActor override func setUp() {
         repository = FakeJokeRepository()
-        viewModel = JokesViewModel(repository: repository, category: Joke.Category.programming)
+        viewModel = JokesViewModel(repository: repository)
     }
     
     override func tearDown() {
@@ -32,7 +33,7 @@ final class JokeViewModelTest: XCTestCase {
         let expectation = expectation(description: "Collect 2 JokesUiState values")
         
         // When
-        viewModel.fetchJokes()
+        viewModel.fetchJokes(by: category)
         
         // Then
         viewModel.$uiState
@@ -48,7 +49,7 @@ final class JokeViewModelTest: XCTestCase {
         XCTAssertEqual(stateValues[0], .loading)
         
         // Assert that the final state is showSetup
-        XCTAssertEqual(stateValues[1], .showSetup(Joke.example.setup))
+        XCTAssertEqual(stateValues[1], .showSetup(Joke.`default`.setup))
     }
     
     @MainActor
@@ -58,7 +59,7 @@ final class JokeViewModelTest: XCTestCase {
         let expectation = expectation(description: "Collect 3 JokesUiState values")
         
         // When
-        viewModel.fetchJokes()
+        viewModel.fetchJokes(by: category)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.viewModel.revealPunchline()
         }
@@ -77,10 +78,10 @@ final class JokeViewModelTest: XCTestCase {
         XCTAssertEqual(stateValues[0], JokesUiState.loading)
         
         // Assert that the second state was showSetup
-        XCTAssertEqual(stateValues[1], .showSetup(Joke.example.setup))
+        XCTAssertEqual(stateValues[1], .showSetup(Joke.`default`.setup))
         
         // Assert that the final state is showPunchline
-        XCTAssertEqual(stateValues[2], .showPunchline(Joke.example.punchline))
+        XCTAssertEqual(stateValues[2], .showPunchline(Joke.`default`.punchline))
     }
     
     @MainActor
@@ -88,7 +89,7 @@ final class JokeViewModelTest: XCTestCase {
         // Given
         var stateValues = [JokesUiState]()
         let expectation = expectation(description: "Collect 4 JokesUiState values")
-        let oldJoke = Joke.example
+        let oldJoke = Joke.`default`
         let newJoke = Joke(
             id: 371,
             setup: "There are 10 kinds of people in this world.",
@@ -96,10 +97,10 @@ final class JokeViewModelTest: XCTestCase {
             type: .programming)
         
         // When
-        viewModel.fetchJokes()
+        viewModel.fetchJokes(by: category)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.viewModel.revealPunchline()
-            self.viewModel.nextJoke()
+            self.viewModel.nextJoke(from: self.category)
         }
         
         // Then
@@ -129,12 +130,12 @@ final class JokeViewModelTest: XCTestCase {
     func test_fetchJokes_onError_setsStateToError() {
         // Given
         repository = FakeJokeRepository(shouldReturnError: true)
-        viewModel = JokesViewModel(repository: repository, category: Joke.Category.programming)
+        viewModel = JokesViewModel(repository: repository)
         var stateValues = [JokesUiState]()
         let expectation = expectation(description: "Collect 2 JokesUiState values")
         
         // When
-        viewModel.fetchJokes()
+        viewModel.fetchJokes(by: category)
         
         // Then
         viewModel.$uiState

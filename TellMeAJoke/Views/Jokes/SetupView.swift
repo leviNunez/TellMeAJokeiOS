@@ -8,13 +8,19 @@
 import SwiftUI
 import Combine
 
-struct Setup: View {
-    let text: String
-    let onQuestionMarkPressed: () -> Void
+extension AnyTransition {
+    static var fadeInOut: AnyTransition {
+        opacity.animation(.easeInOut(duration: 0.5))
+    }
+}
+
+struct SetupView: View {
+    var text: String
+    var onQuestionMarkPressed: () -> Void
+    @State private var rotationValue = 0.0
+    @State private var offsetValue = 0.0
+    @State private var isAboutToExit = false
     @State private var cancellables = Set<AnyCancellable>()
-    @State private var yScale = 0.0
-    @State private var rotationDegrees = 0.0
-    @State private var isAboutToTransition = false
     
     var body: some View {
         GeometryReader { proxy in
@@ -26,23 +32,23 @@ struct Setup: View {
                 
                 Text(text)
                     .modifier(JokeTextModifier(size: 24))
-                    .scaleEffect(isAboutToTransition ? 4 : 1)
-                    .opacity(isAboutToTransition ? 0 : 1)
-                    .animation(.linear, value: isAboutToTransition)
+                    .scaleEffect(isAboutToExit ? 4 : 1)
+                    .opacity(isAboutToExit ? 0 : 1)
+                    .animation(.linear, value: isAboutToExit)
      
                 Spacer()
                 
                 Image(ImageAsset.questionMark)
                     .resizable()
                     .frame(width: 100, height: 100)
-                    .rotationEffect(.degrees(rotationDegrees))
-                    .animation(.rotation, value: rotationDegrees)
-                    .offset(y: height * yScale)
-                    .animation(.offset, value: yScale)
-                    .opacity(isAboutToTransition ? 0 : 1)
-                    .animation(.linear, value: isAboutToTransition)
+                    .rotationEffect(.degrees(rotationValue))
+                    .animation(.linear(duration: 1).speed(1.2), value: rotationValue)
+                    .offset(y: height * offsetValue)
+                    .animation(.linear(duration: 1).speed(2.5), value: offsetValue)
+                    .opacity(isAboutToExit ? 0 : 1)
+                    .animation(.linear, value: isAboutToExit)
                     .onTapGesture {
-                        startPunchlineTransition()
+                        startExitAnimation()
                     }
                     .onAppear() {
                         startAnimationLoop()
@@ -57,28 +63,26 @@ struct Setup: View {
         .transition(.fadeInOut)
     }
     
-    private func startPunchlineTransition() {
+    private func startExitAnimation() {
+        isAboutToExit = true
         cancelAnimationLoop()
-        isAboutToTransition = true
-        let timeIntervalInSeconds = 0.5
-        DispatchQueue.main.asyncAfter(deadline: .now() + timeIntervalInSeconds) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             onQuestionMarkPressed()
         }
     }
     
     private func cancelAnimationLoop() {
-        cancellables.first?.cancel()
+        cancellables.removeAll()
     }
     
     private func startAnimationLoop() {
-        let timeIntervalInSeconds = 5.0
+        let timeIntervalInSeconds = max(Double(text.count / 10), 2.5)
         Timer.publish(every: timeIntervalInSeconds, on: .main, in: .common).autoconnect()
             .sink { _ in
-                yScale = -0.3
-                rotationDegrees = rotationDegrees == 360 ? 0 : 360
-                
+                rotationValue = rotationValue == 360 ? 0 : 360
+                offsetValue = -0.3
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    yScale = 0.0
+                    offsetValue = 0.0
                 }
             }.store(in: &cancellables)
     }
@@ -86,12 +90,12 @@ struct Setup: View {
 
 struct JokeSetup_Previews: PreviewProvider {
     static var previews: some View {
-        Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
+        SetupView(text: Joke.`default`.setup, onQuestionMarkPressed: {})
             .previewDisplayName("Default")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
         
-        Setup(text: Joke.example.setup, onQuestionMarkPressed: {})
+        SetupView(text: Joke.`default`.setup, onQuestionMarkPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)

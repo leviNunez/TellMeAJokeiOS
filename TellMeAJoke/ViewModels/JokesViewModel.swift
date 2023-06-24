@@ -16,23 +16,21 @@ enum JokesUiState: Equatable {
 @MainActor
 final class JokesViewModel: ObservableObject {
     private let repository: JokesRepository
-    private let category: Joke.Category
     private var currentJokeIndex = 0
     private var jokes = [Joke]()
     @Published var uiState: JokesUiState = .loading
     private var cancellables = Set<AnyCancellable>()
     
-    init(repository: JokesRepository, category: Joke.Category) {
+    init(repository: JokesRepository) {
         self.repository = repository
-        self.category = category
     }
     
-    func nextJoke() {
+    func nextJoke(from category: String) {
         if currentJokeIndex < jokes.count - 1 {
             currentJokeIndex += 1
             revealSetup()
         } else {
-            fetchJokes()
+            fetchJokes(by: category)
         }
     }
     
@@ -40,10 +38,10 @@ final class JokesViewModel: ObservableObject {
         uiState = .showSetup(jokes[currentJokeIndex].setup)
     }
     
-    func fetchJokes() {
+    func fetchJokes(by category: String) {
         uiState = .loading
         currentJokeIndex = 0
-        repository.fetchJokes(by: category.rawValue)
+        repository.fetchJokes(by: category)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JokeResponse: Decodable {
+struct JokesResponse: Decodable {
     let jokes: [Joke]
 }
 
@@ -16,12 +16,14 @@ struct Joke: Decodable {
     let setup, punchline: String
     let type: Category
     
-    enum Category: String, CaseIterable, Decodable {
-        case general = "general"
+    enum Category: String, CaseIterable, Identifiable, Decodable {
         case programming = "programming"
+        case general = "general"
+        
+        var id: String { rawValue }
     }
     
-    static var example = Joke(
+    static var `default` = Joke(
         id: 398,
         setup: "Where did the API go to eat?",
         punchline: "To the RESTaurant.",

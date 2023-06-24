@@ -7,13 +7,22 @@
 
 import SwiftUI
 
-struct Punchline: View {
-    let text: String
-    let onBackPressed: () -> Void
-    let onNextPressed: () -> Void
-    @State private var isTransitioning = false
+struct PunchlineView: View {
+    var text: String
+    var onBackPressed: () -> Void
+    var onNextPressed: () -> Void
+    @State private var isPlayingEntranceAnimation = false
     @State private var shouldShowButtons = false
-    private let laughImage = ImageAsset.randomLaughImage()
+    
+    private let laughImage: String = {
+        let images = [
+            ImageAsset.laughingEmoji1,
+            ImageAsset.laughingEmoji2,
+            ImageAsset.laughingEmoji3,
+            ImageAsset.laughingEmoji4
+        ]
+        return images[Int.random(in: 1..<images.count)]
+    }()
     
     var body: some View {
         GeometryReader { proxy in
@@ -26,8 +35,8 @@ struct Punchline: View {
                 
                 Text(text)
                     .modifier(JokeTextModifier(size: 24))
-                    .scaleEffect(isTransitioning ? 1 : 4)
-                    .animation(.linear, value: isTransitioning)
+                    .scaleEffect(isPlayingEntranceAnimation ? 1 : 4)
+                    .animation(.linear, value: isPlayingEntranceAnimation)
                     .transition(.fadeInOut)
                 
                 Spacer()
@@ -35,9 +44,9 @@ struct Punchline: View {
                 ZStack {
                     if shouldShowButtons {
                         HStack {
-                            ImageButton(imageName: ImageAsset.back, title: StringResource.back, onButtonPressed: onBackPressed)
+                            ImageButton(image: ImageAsset.back, title: StringResource.back, onPressed: onBackPressed)
                             Spacer()
-                            ImageButton(imageName: ImageAsset.next, title: StringResource.next, onButtonPressed: onNextPressed)
+                            ImageButton(image: ImageAsset.next, title: StringResource.next, onPressed: onNextPressed)
                         }
                         .transition(.fadeInOut)
                         
@@ -45,8 +54,8 @@ struct Punchline: View {
                         Image(laughImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .scaleEffect(isTransitioning ? 2.5 : 0.2, anchor: .center)
-                            .animation(.repeatedScaling, value: isTransitioning)
+                            .scaleEffect(isPlayingEntranceAnimation ? 2.5 : 0.2, anchor: .center)
+                            .animation(.linear(duration: 0.5).repeatCount(4), value: isPlayingEntranceAnimation)
                             .transition(.fadeInOut)
                         
                     }
@@ -57,26 +66,30 @@ struct Punchline: View {
             }
             .frame(width: width, height: height)
             .onAppear() {
-                isTransitioning = true
-                let timeIntervalInSeconds = 1.5
-                DispatchQueue.main.asyncAfter(deadline: .now() + timeIntervalInSeconds) {
-                    shouldShowButtons = true
-                }
+                startEntranceAnimation()
             }
             
         }
         .padding(.horizontal)
     }
+    
+    private func startEntranceAnimation() {
+        isPlayingEntranceAnimation = true
+        let animationDurationInSeconds = 1.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDurationInSeconds) {
+            shouldShowButtons = true
+        }
+    }
 }
 
 struct Punchline_Previews: PreviewProvider {
     static var previews: some View {
-        Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
+        PunchlineView(text: Joke.`default`.punchline, onBackPressed: {}, onNextPressed: {})
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
             .previewDisplayName("Default")
         
-        Punchline(text: Joke.example.punchline, onBackPressed: {}, onNextPressed: {})
+        PunchlineView(text: Joke.`default`.punchline, onBackPressed: {}, onNextPressed: {})
             .previewDisplayName("iPhone SE")
             .previewDevice(PreviewDevice(rawValue: "iPhone SE (3rd generation)"))
             .frame(maxWidth: .infinity, maxHeight: .infinity)

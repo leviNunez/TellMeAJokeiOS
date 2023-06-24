@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct JokeProgressView: View {
-    @State var rotationDegrees = 0.0
+struct LoadingView: View {
+    @State private var rotationDegrees = 0.0
     
     var body: some View {
         HStack {
@@ -23,15 +23,15 @@ struct JokeProgressView: View {
                         }
                 }
 
-            Text(StringResource.loading)
+            Text(StringResource.jokingAround)
                 .modifier(JokeTextModifier())
         }
     }
 }
 
-struct CustomProgressView_Previews: PreviewProvider {
+struct Loading_Previews: PreviewProvider {
     static var previews: some View {
-            JokeProgressView()
+            LoadingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
     }

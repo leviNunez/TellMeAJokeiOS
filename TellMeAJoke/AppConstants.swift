@@ -20,25 +20,27 @@ enum ColorAsset {
 
 enum ImageAsset {
     static let lighting = "Lighting"
+    static let programming = "Programming"
+    static let general = "General"
+    static let start = "Start"
     static let questionMark = "QuestionMark"
-    static let laugh1 = "Laugh1"
-    static let laugh2 = "Laugh2"
-    static let laugh3 = "Laugh3"
-    static let laugh4 = "Laugh4"
+    static let laughingEmoji1 = "LaughingEmoji1"
+    static let laughingEmoji2 = "LaughingEmoji2"
+    static let laughingEmoji3 = "LaughingEmoji3"
+    static let laughingEmoji4 = "LaughingEmoji4"
     static let back = "Back"
     static let next = "Next"
     static let cloud = "Cloud"
     static let retry = "Retry"
-    
-    static func randomLaughImage() -> String {
-        let randomInt = Int.random(in: 1...4)
-        return "Laugh\(randomInt)"
-    }
 }
 
 enum StringResource {
     static let appName = "Tell Me A Joke"
-    static let loading = "Loading fast…"
+    static let selectCategory = "Select category"
+    static let start = "Start"
+    static let jokingAround = "Joking around…"
+    static let programming = "Programming"
+    static let general = "General"
     static let back = "Back"
     static let next = "Next"
     static let error = "Oops… I think something \nwent wrong."
