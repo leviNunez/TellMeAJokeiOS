@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let repository: JokeRepositoryProtocol
-    
-    init() {
-        let service = NetworkManager()
-        repository = DefaultJokeRepository(service: service)
-    }
     
     var body: some View {
-        JokeHost(viewModel: JokeViewModel(jokeRepository: repository))
+        CategoryHome()
     }
 }
 

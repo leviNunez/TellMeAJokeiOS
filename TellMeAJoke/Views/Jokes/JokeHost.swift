@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct JokeHost: View {
-    @StateObject private var viewModel: JokeViewModel
+    var category: Joke.Category
+    @StateObject private var viewModel: JokesViewModel
+    @Environment(\.dismiss) private var dismiss
     
-    init(viewModel: @autoclosure @escaping () -> JokeViewModel) {
+    init(category: Joke.Category, viewModel: @autoclosure @escaping () -> JokesViewModel) {
+        self.category = category
         self._viewModel = StateObject(wrappedValue: viewModel())
     }
     
@@ -21,30 +24,44 @@ struct JokeHost: View {
             
             switch viewModel.uiState {
             case .loading:
-                JokeProgressView()
+                LoadingView()
             case .showSetup(let setup):
-                Setup(
+                SetupView(
                     text: setup,
                     onQuestionMarkPressed: { viewModel.revealPunchline() })
             case .showPunchline(let punchline):
-                Punchline(
+                PunchlineView(
                     text: punchline,
                     onBackPressed: { viewModel.revealSetup() },
-                    onNextPressed: { viewModel.getJoke() })
+                    onNextPressed: { viewModel.nextJoke(from: category.rawValue) })
             case .error:
-                ErrorView(onRetry: { viewModel.getJoke() })
+                ErrorView(onRetry: { viewModel.fetchJokes(by: category.rawValue) })
             }
-        } 
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.left")
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                Text(category.rawValue.capitalized)
+                    .modifier(JokeTextModifier())
+            }
+        }
         .onAppear() {
-            viewModel.getJoke()
+            viewModel.fetchJokes(by: category.rawValue)
         }
     }
 }
 
 struct JokeHost_Previews: PreviewProvider {
     static var previews: some View {
-        JokeHost(viewModel: JokeViewModel(jokeRepository: DefaultJokeRepository(service: NetworkManager())))
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(ColorAsset.primary))
+        NavigationStack {
+            JokeHost(category: .general, viewModel: JokesViewModel(repository: DefaultJokesRepository(service: NetworkManager())))
+        }
     }
 }

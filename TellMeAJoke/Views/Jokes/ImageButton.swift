@@ -8,28 +8,29 @@
 import SwiftUI
 
 struct ImageButton: View {
-    let imageName: String
-    let title: String
-    let onButtonPressed: () -> Void
+    var image: String
+    var title: String
+    var onPressed: () -> Void
     
     var body: some View {
         VStack {
-            Image(imageName)
+            Image(image)
                 .resizable()
-                .frame(width: 90, height: 90)
+                .frame(width: 80, height: 80)
+                .foregroundColor(.blue)
             
             Text(title)
                 .modifier(JokeTextModifier())
         }
         .onTapGesture {
-            onButtonPressed()
+            onPressed()
         }
     }
 }
 
 struct ImageButton_Previews: PreviewProvider {
     static var previews: some View {
-        ImageButton(imageName: ImageAsset.questionMark, title: StringResource.next, onButtonPressed: {})
+        ImageButton(image: ImageAsset.start, title: StringResource.next, onPressed: {})
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(ColorAsset.primary))
     }

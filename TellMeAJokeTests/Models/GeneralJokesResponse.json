@@ -1,0 +1,14 @@
+[
+    {
+        "type": "general",
+        "setup": "What do you call an elephant that doesn’t matter?",
+        "punchline": "An irrelephant.",
+        "id": 223
+    },
+    {
+        "type": "general",
+        "setup": "How does a train eat?",
+        "punchline": "It goes chew, chew",
+        "id": 6
+    }
+]
