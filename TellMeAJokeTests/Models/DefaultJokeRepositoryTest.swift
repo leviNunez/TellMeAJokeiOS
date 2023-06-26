@@ -10,17 +10,15 @@ import Combine
 @testable import TellMeAJoke
 
 final class DefaultJokeRepositoryTest: XCTestCase {
-    private var service: JokesService!
     private var repository: JokesRepository!
     private var cancellables = [AnyCancellable]()
 
     override func setUp() {
-        service = FakeNetworkManager()
+        let service = FakeNetworkManager()
         repository = DefaultJokesRepository(service: service)
     }
     
     override func tearDown() {
-        service = nil
         repository = nil
         cancellables.removeAll()
     }
